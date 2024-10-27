@@ -20,7 +20,7 @@ class TextGeneratorService
             $lengthType = 'long';
         }
 
-        if ($temperature == 0) {
+        if ($temperature < 0.5) {
             $selectedResponses = $responses['low'][$lengthType];
         } elseif ($temperature == 0.5) {
             $selectedResponses = $responses['medium'][$lengthType];
@@ -28,11 +28,9 @@ class TextGeneratorService
             $selectedResponses = $responses['high'][$lengthType];
         }
 
-
         $aleatoryResponse = $selectedResponses[array_rand($selectedResponses)];
         $aleatoryIntroductions = $introductions[array_rand($introductions)];
 
-        // Combinar el prompt con la respuesta generada y limitarla al maxLength
         return Str::limit($aleatoryIntroductions . ' ' . $prompt . ' ' . $aleatoryResponse, $maxLength);
     }
 }
