@@ -5,8 +5,7 @@ import ChatResponse from "./ChatResponse";
 import InputChat from "./InputChat";
 import Header from "./Header";
 
-export default function MainBox() {
-    const [responseMessage, setResponseMessage] = useState(null);
+export default function MainBox({ responseMessage, setResponseMessage }) {
     return (
         <>
             <Box

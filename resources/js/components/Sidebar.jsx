@@ -12,10 +12,11 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import { Typography } from "@mui/material";
 
 const drawerWidth = 240;
 
-export default function Sideabar() {
+export default function Sidebar({ history }) {
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
@@ -34,22 +35,22 @@ export default function Sideabar() {
                 anchor="left"
             >
                 <Toolbar />
-                <Divider />
                 <List>
-                    {Array.from({ length: 30 }, (_, index) => (
-                        <ListItem key={index} disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    {index % 2 === 0 ? (
-                                        <InboxIcon />
-                                    ) : (
-                                        <MailIcon />
-                                    )}
-                                </ListItemIcon>
-                                <ListItemText primary={`Item ${index + 1}`} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
+                    {history.length > 0 ? (
+                        history.map((item, index) => (
+                            <ListItem key={index} disablePadding>
+                                <ListItemButton>
+                                    <ListItemText
+                                        primary={item.generated_text}
+                                    />
+                                </ListItemButton>
+                            </ListItem>
+                        ))
+                    ) : (
+                        <Typography variant="body2" sx={{ padding: 2 }}>
+                            No hay respuestas aún.
+                        </Typography>
+                    )}
                 </List>
             </Drawer>
         </Box>

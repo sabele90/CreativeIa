@@ -34,7 +34,7 @@ class TextGenerationController extends Controller
                 'maxLength' => 'required|integer|min:10|max:1000',
                 'temperature' => 'required|numeric|min:0.0|max:1.0',
             ], [
-                'prompt.required' => 'El campo prompt no puede estar vacío.',
+                'prompt.required' => 'Debe de escribir un mensaje.',
                 'maxLength.required' => 'Debe indicar la longitud máxima de la respuesta.',
                 'temperature.required' => 'Debe seleccionar el grado de creatividad.',
             ]);
