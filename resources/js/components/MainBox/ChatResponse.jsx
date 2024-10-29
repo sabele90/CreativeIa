@@ -25,8 +25,8 @@ export default function ChatResponse({ responseMessage }) {
                     <Typography>{responseMessage.generated_text}</Typography>
                 ) : (
                     <Typography className="gradient-text">
-                        Bienvenido a la IA Crearive Mind Lab, ¿en qué te puedo
-                        ayudar?
+                        Bienvenido a la IA de Crearive Mind Labs, ¿en qué te
+                        puedo ayudar?
                     </Typography>
                 )}
             </Box>
