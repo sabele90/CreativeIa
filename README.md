@@ -6,15 +6,18 @@ Laravel: 11.29.0
 PHP: 8.3.2
 Base de Datos: MySQL
 
-<h3>Modelos</h3>
-PromptHistory: Modelo de Eloquent que representa el historial de prompts enviados por el usuario y las respuestas generadas por la IA. Contiene los campos user_id, prompt, generated_text, max_length, y temperature.
+<h3>Modelos:</h3>
+<h4><bold>PromptHistory</bold></h4> 
+Modelo de Eloquent que representa el historial de prompts enviados por el usuario y las respuestas generadas por la IA. Contiene los campos user_id, prompt, generated_text, max_length, y temperature.
 
-<h3>Controlador <strong>TextGenerationController</strong></h3>
- Controlador que maneja las solicitudes de generación de texto y obtención del historial de prompts.
+<h3>Controlador</h3>
+<strong>TextGenerationController</strong>
+Controlador que maneja las solicitudes de generación de texto y obtención del historial de prompts.
 generateText: Valida la entrada, genera una respuesta y guarda el prompt en el historial.
 getHistory: Devuelve el historial de prompts.
 
-<h3>Servicio <strong>TextGeneratorService</strong></h3>
+<h3>Servicio </h3>
+<strong>TextGeneratorService</strong>
  Lógica separada para generar respuestas basadas en las configuraciones y variables definidas en los archivos de configuración.
 
 <h3>Archivos de Configuración</h3>
