@@ -29,7 +29,7 @@ export default function InputChat({ setResponseMessage }) {
                 temperature,
             });
 
-            setResponseMessage(response.data.generated_text);
+            setResponseMessage(response.data);
             setErrorMessage(null);
             setPrompt("");
         } catch (error) {

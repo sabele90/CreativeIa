@@ -23,10 +23,12 @@ function App() {
 
     useEffect(() => {
         if (responseMessage) {
-            setHistory((prevHistory) => [
-                ...prevHistory,
-                { generated_text: responseMessage },
-            ]);
+            setHistory((prevHistory) => {
+                const exists = prevHistory.find(
+                    (item) => item.id === responseMessage.id
+                );
+                return exists ? prevHistory : [...prevHistory, responseMessage];
+            });
         }
     }, [responseMessage]);
 

@@ -46,9 +46,7 @@ export default function Sidebar({ history, selectHistory }) {
                         history.map((item, index) => (
                             <ListItem key={index} disablePadding>
                                 <ListItemButton
-                                    onClick={() =>
-                                        selectHistory(item.generated_text)
-                                    }
+                                    onClick={() => selectHistory(item)}
                                     sx={{
                                         "&:hover": {
                                             borderRadius: "8px",
