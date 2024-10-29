@@ -8,6 +8,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { Typography } from "@mui/material";
+import HistoryIcon from "@mui/icons-material/History";
 
 const drawerWidth = 240;
 
@@ -24,23 +25,27 @@ export default function Sidebar({ history, selectHistory }) {
                         width: drawerWidth,
                         boxSizing: "border-box",
                         overflowY: "auto",
+                        borderRadius: "12px",
+                        boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+                        margin: "16px",
+                        padding: "16px",
                     },
                 }}
                 variant="permanent"
                 anchor="left"
             >
-                <Toolbar>
-                    <Typography
-                        variant="h7"
-                        sx={{
-                            fontWeight: "bold",
-                            padding: "20px",
-                        }}
-                    >
-                        History
-                    </Typography>
-                </Toolbar>
-
+                <Box>
+                    <Toolbar>
+                        <Typography
+                            variant="h7"
+                            sx={{
+                                fontWeight: "bold",
+                            }}
+                        >
+                            <HistoryIcon color="primary" />
+                        </Typography>
+                    </Toolbar>
+                </Box>
                 <List>
                     {history.length > 0 ? (
                         history.map((item, index) => (

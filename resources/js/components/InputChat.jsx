@@ -47,7 +47,14 @@ export default function InputChat({ setResponseMessage }) {
     };
     return (
         <>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <Box
+                sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1,
+                    margin: 2,
+                }}
+            >
                 <TextField
                     fullWidth
                     variant="filled"
@@ -68,7 +75,7 @@ export default function InputChat({ setResponseMessage }) {
                 />
 
                 <IconButton aria-label="send message" onClick={handleSend}>
-                    <SendRoundedIcon />
+                    <SendRoundedIcon color="primary" />
                 </IconButton>
             </Box>
             <Box
@@ -77,7 +84,7 @@ export default function InputChat({ setResponseMessage }) {
                     justifyContent: "flex-end",
                     alignItems: "center",
                     gap: 1,
-                    marginRight: 4,
+                    marginRight: 10,
                 }}
             >
                 <Typography variant="body2">
@@ -88,7 +95,7 @@ export default function InputChat({ setResponseMessage }) {
                     onChange={(e, newValue) => setMaxLength(newValue)}
                     min={10}
                     max={1000}
-                    sx={{ width: 100, margin: 2 }}
+                    sx={{ width: 100, margin: 1 }}
                 />
 
                 <Typography variant="body2">
@@ -100,7 +107,7 @@ export default function InputChat({ setResponseMessage }) {
                     step={0.1}
                     min={0.5}
                     max={1.0}
-                    sx={{ width: 100, margin: 2 }}
+                    sx={{ width: 100, margin: 1 }}
                 />
 
                 {errorMessage && <Alert severity="error">{errorMessage}</Alert>}

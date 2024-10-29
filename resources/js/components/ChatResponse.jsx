@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import logo from "../assets/images/logo.gif";
+import loadingGif from "../assets/images/loadingGif.gif";
 import "../../css/text.css";
 
 export default function ChatResponse({ responseMessage }) {
@@ -20,7 +20,7 @@ export default function ChatResponse({ responseMessage }) {
 
     return (
         <>
-            <Box sx={{ flexGrow: 1, mt: 1 }}>
+            <Box sx={{ flexGrow: 1, m: 4 }}>
                 {responseMessage && !loading ? (
                     <Typography>{responseMessage.generated_text}</Typography>
                 ) : (
@@ -38,8 +38,8 @@ export default function ChatResponse({ responseMessage }) {
                     }}
                 >
                     <img
-                        src={logo}
-                        alt="logo Creative Ia"
+                        src={loadingGif}
+                        alt="gif Creative Ia"
                         width={80}
                         margin={10}
                     />
