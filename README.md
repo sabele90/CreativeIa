@@ -1,66 +1,46 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<h1>Creative Mind Lab</h1>
+Backend
+Este es el backend de la aplicación Creative Mind Lab, una aplicación de chat que genera respuestas creativas basadas en un prompt del usuario.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Laravel: 11.29.0
+PHP: 8.3.2
+Base de Datos: MySQL
 
-## About Laravel
+<h3>Modelos</h3>
+PromptHistory: Modelo de Eloquent que representa el historial de prompts enviados por el usuario y las respuestas generadas por la IA. Contiene los campos user_id, prompt, generated_text, max_length, y temperature.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<h3>Controlador <strong>TextGenerationController</strong></h3>
+ Controlador que maneja las solicitudes de generación de texto y obtención del historial de prompts.
+generateText: Valida la entrada, genera una respuesta y guarda el prompt en el historial.
+getHistory: Devuelve el historial de prompts.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<h3>Servicio <strong>TextGeneratorService</strong></h3>
+ Lógica separada para generar respuestas basadas en las configuraciones y variables definidas en los archivos de configuración.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<h3>Archivos de Configuración</h3>
+<strong>config/introductionText.php</strong> Contiene introducciones de texto predeterminadas que se agregan al comienzo de cada respuesta generada.
+<strong>config/generatedText.php</strong> Define respuestas posibles organizadas por nivel de creatividad (low, medium, high) y longitud (short, medium, long).
 
-## Learning Laravel
+<h3>Rutas de la API</h3>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<strong>POST /api/generate-text</strong> Genera una respuesta a partir de un prompt proporcionado por el usuario y guarda el prompt en la base de datos.
+<strong>GET /api/history</strong> Devuelve el historial completo de prompts y respuestas.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Pruebas con Postman
+Generar Texto:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Método: POST
+URL: http://localhost:8000/api/generate-text
+Cuerpo: JSON con los campos prompt, maxLength y temperature.
+Ejemplo de cuerpo de solicitud:
+json
+Copy code
+{
+"prompt": "Hello CreativeIa",
+"maxLength": 50,
+"temperature": 0.7
+}
+Obtener Historial:
 
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Método: GET
+URL: http://localhost:8000/api/history

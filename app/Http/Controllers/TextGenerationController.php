@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use App\Models\PrompGeneratedText;
 use App\Models\PromptHistory;
 use App\Services\TextGeneratorService;
 use Illuminate\Support\Facades\Log;
