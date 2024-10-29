@@ -1,4 +1,4 @@
-<h1>Creative Mind Lab</h1>![Creative Ia Logo](resources/js/assets/images/logo.png)
+<h1>Creative Mind Lab</h1>![Creative Ia Logo]https://github.com/sabele90/CreativeIa/blob/main/resources/js/assets/images/logo.png
 
 Backend
 Este es el backend de la aplicación Creative Mind Lab, una aplicación de chat que genera respuestas creativas basadas en un prompt del usuario.
