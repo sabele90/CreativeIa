@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import loadingGif from "../assets/images/loadingGif.gif";
-import "../../css/text.css";
+import loadingGif from "../../assets/images/loadingGif.gif";
+import "../../../css/text.css";
 
 export default function ChatResponse({ responseMessage }) {
     const [loading, setLoading] = useState(false);
@@ -20,7 +20,7 @@ export default function ChatResponse({ responseMessage }) {
 
     return (
         <>
-            <Box sx={{ flexGrow: 1, m: 4 }}>
+            <Box sx={{ flexGrow: 1, m: 5 }}>
                 {responseMessage && !loading ? (
                     <Typography>{responseMessage.generated_text}</Typography>
                 ) : (

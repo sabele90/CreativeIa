@@ -52,7 +52,7 @@ export default function InputChat({ setResponseMessage }) {
                     display: "flex",
                     alignItems: "center",
                     gap: 1,
-                    margin: 2,
+                    margin: 4,
                 }}
             >
                 <TextField

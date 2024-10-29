@@ -1,9 +1,12 @@
+// App.js
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from "./components/Layouts/Layout";
 import Sidebar from "./components/Sidebar";
-import MainBox from "./components/MainBox";
-import { Box } from "@mui/material";
+import MainBox from "./components/MainBox/MainBox";
 import axios from "axios";
-import "../css/app.css";
+import { Box } from "@mui/material";
+
 function App() {
     const [history, setHistory] = useState([]);
     const [responseMessage, setResponseMessage] = useState(null);
@@ -37,14 +40,28 @@ function App() {
     };
 
     return (
-        <Box sx={{ display: "flex", flexGrow: 1 }}>
-            <Sidebar history={history} selectHistory={handleSelectHistory} />
+        <Router>
+            <Box sx={{ display: "flex" }}>
+                <Sidebar
+                    history={history}
+                    selectHistory={handleSelectHistory}
+                />
 
-            <MainBox
-                responseMessage={responseMessage}
-                setResponseMessage={setResponseMessage}
-            />
-        </Box>
+                <Routes>
+                    <Route path="/" element={<Layout />}>
+                        <Route
+                            index
+                            element={
+                                <MainBox
+                                    responseMessage={responseMessage}
+                                    setResponseMessage={setResponseMessage}
+                                />
+                            }
+                        />
+                    </Route>
+                </Routes>
+            </Box>
+        </Router>
     );
 }
 
