@@ -1,13 +1,15 @@
-<h1>Creative Mind Lab</h1>![Creative Ia Logo](./logo.png)
+<h1>Creative Mind Lab</h1>
+<h2>Backend</h2>
 
-Backend
 Este es el backend de la aplicación Creative Mind Lab, una aplicación de chat que genera respuestas creativas basadas en un prompt del usuario.
 
-Laravel: 11.29.0
-PHP: 8.3.2
-Base de Datos: MySQL
+<ul>
+<li>Laravel: 11.29.0</li>
+<li>PHP: 8.3.2</li>
+<li>Base de Datos: MySQL</li>
+</ul>
 
-<h3>Modelos:</h3>
+<h3>Modelo</h3>
 <h4><bold>PromptHistory</bold></h4> 
 Modelo de Eloquent que representa el historial de prompts enviados por el usuario y las respuestas generadas por la IA. Contiene los campos user_id, prompt, generated_text, max_length, y temperature.
 
@@ -26,14 +28,16 @@ getHistory: Devuelve el historial de prompts.
 <strong>config/generatedText.php</strong> Define respuestas posibles organizadas por nivel de creatividad (low, medium, high) y longitud (short, medium, long).
 
 <h3>Rutas de la API</h3>
-
-<strong>POST /api/generate-text</strong> Genera una respuesta a partir de un prompt proporcionado por el usuario y guarda el prompt en la base de datos.
-<strong>GET /api/history</strong> Devuelve el historial completo de prompts y respuestas.
+<ul>
+<li><strong>POST /api/generate-text</strong> Genera una respuesta a partir de un prompt proporcionado por el usuario y guarda el prompt en la base de datos.</li>
+<li><strong>GET /api/history</strong> Devuelve el historial completo de prompts y respuestas.</li>
+</ul>
 
 Pruebas con Postman
-Generar Texto:
 
-Método: POST
+<ul>
+<li>Generar Texto:</li>
+<p>Método: POST</p>
 URL: http://localhost:8000/api/generate-text
 Cuerpo: JSON con los campos prompt, maxLength y temperature.
 Ejemplo de cuerpo de solicitud:
@@ -44,7 +48,7 @@ Copy code
 "maxLength": 50,
 "temperature": 0.7
 }
-Obtener Historial:
-
-Método: GET
+<li>Obtener Historial:</li>
+<p>Método: GET</p>
 URL: http://localhost:8000/api/history
+</ul>
