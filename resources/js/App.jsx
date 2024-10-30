@@ -1,4 +1,3 @@
-// App.js
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layouts/Layout";
@@ -20,20 +19,8 @@ function App() {
                 console.error("Error al obtener el historial:", error);
             }
         };
-
         fetchHistory();
     }, []);
-
-    useEffect(() => {
-        if (responseMessage) {
-            setHistory((prevHistory) => {
-                const exists = prevHistory.find(
-                    (item) => item.id === responseMessage.id
-                );
-                return exists ? prevHistory : [...prevHistory, responseMessage];
-            });
-        }
-    }, [responseMessage]);
 
     const handleSelectHistory = (selectedMessage) => {
         setResponseMessage(selectedMessage);
@@ -55,6 +42,8 @@ function App() {
                                 <MainBox
                                     responseMessage={responseMessage}
                                     setResponseMessage={setResponseMessage}
+                                    history={history}
+                                    setHistory={setHistory}
                                 />
                             }
                         />

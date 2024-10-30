@@ -4,11 +4,13 @@ import TextField from "@mui/material/TextField";
 import { Alert, IconButton, Slider, Typography } from "@mui/material";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import axios from "axios";
-export default function InputChat({ setResponseMessage }) {
+
+export default function InputChat({ setResponseMessage, setHistory, history }) {
     const [prompt, setPrompt] = useState("");
     const [maxLength, setMaxLength] = useState(0);
     const [temperature, setTemperature] = useState(0);
-    const [errorMessage, setErrorMessage] = React.useState(null);
+    const [errorMessage, setErrorMessage] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handlePromptChange = (e) => {
         setPrompt(e.target.value);
@@ -23,28 +25,30 @@ export default function InputChat({ setResponseMessage }) {
             return setErrorMessage("Selecciona un nivel de creatividad.");
 
         try {
+            setLoading(true);
             const response = await axios.post("/api/generate-text", {
                 prompt,
                 maxLength,
                 temperature,
             });
 
-            setResponseMessage(response.data);
+            const newMessage = response.data;
+            setResponseMessage(newMessage);
+            setHistory([...history, newMessage]);
             setErrorMessage(null);
             setPrompt("");
         } catch (error) {
-            if (error.response && error.response.data) {
-                setErrorMessage(
-                    error.response.data.messages ||
-                        error.response.data.message ||
-                        "Error desconocido."
-                );
-            } else {
-                setErrorMessage("Error al enviar el mensaje.");
-            }
+            setErrorMessage(
+                error.response?.data?.messages ||
+                    error.response?.data?.message ||
+                    "Error al enviar el mensaje."
+            );
             setResponseMessage(null);
+        } finally {
+            setLoading(false);
         }
     };
+
     return (
         <>
             <Box
@@ -67,13 +71,10 @@ export default function InputChat({ setResponseMessage }) {
                         "& .MuiFilledInput-root": {
                             borderRadius: 6,
                             padding: "15px",
-                            "&:before, &:after": {
-                                display: "none",
-                            },
+                            "&:before, &:after": { display: "none" },
                         },
                     }}
                 />
-
                 <IconButton aria-label="send message" onClick={handleSend}>
                     <SendRoundedIcon color="primary" />
                 </IconButton>
@@ -88,7 +89,7 @@ export default function InputChat({ setResponseMessage }) {
                 }}
             >
                 <Typography variant="body2">
-                    Longitud Máxima: {maxLength === 0 ? " " : maxLength}
+                    Longitud Máxima: {maxLength}
                 </Typography>
                 <Slider
                     value={maxLength}
@@ -97,9 +98,8 @@ export default function InputChat({ setResponseMessage }) {
                     max={1000}
                     sx={{ width: 100, margin: 1 }}
                 />
-
                 <Typography variant="body2">
-                    Creatividad : {temperature === 0 ? " " : temperature}
+                    Creatividad : {temperature}
                 </Typography>
                 <Slider
                     value={temperature}
@@ -109,7 +109,6 @@ export default function InputChat({ setResponseMessage }) {
                     max={1.0}
                     sx={{ width: 100, margin: 1 }}
                 />
-
                 {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
             </Box>
         </>
